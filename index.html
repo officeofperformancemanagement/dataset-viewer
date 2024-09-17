@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                font-size: 14pt;
+            }
+            label {
+                display: block;
+            }
+            button {
+                display: block;
+                height: 40px;
+                text-align: center;
+                width: 200px;
+            }
+            input {
+                font-size: 14pt;
+                height: 30px;
+                padding: 5px 10px;
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dataset Viewer</h1>
+        <div id="init">
+            <br/><br/><br/>
+            <label for="uuid">Please enter the uuid (4x4) below</label>
+            <input type="text" id="uuid" placeholder="fh31-37xv">
+            <br/><br/><br/><br/>
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <label for="password">Password</label>
+            <input type="text" id="password">
+            <br/><br/><br/><br/>
+            <button id="go">Go</button>    
+        </div>
+        <div id="results">
+            <div id="metadata">
+
+            </div>
+        </div>
+        <script>
+            document.getElementById("go").addEventListener("click", function () {
+                var uuid = document.getElementById("uuid").value;
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+
+                const url = "https://internal.chattadata.org/api/views/" + uuid + ".json";
+                const headers = {};
+                if (username && password) {
+                    headers.Authorization = "Basic " + btoa(username + ":" + password);
+                }
+
+                fetch(url, { headers })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("metadata").innerText = JSON.stringify(data, undefined, 4);
+                });
+            })
+        </script>
+    </body>
+</html>

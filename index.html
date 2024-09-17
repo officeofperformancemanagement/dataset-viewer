@@ -29,10 +29,10 @@
             <label for="uuid">Please enter the uuid (4x4) below</label>
             <input type="text" id="uuid" placeholder="fh31-37xv">
             <br/><br/><br/><br/>
-            <label for="username">Username</label>
+<!--             <label for="username">Username</label>
             <input type="text" id="username">
             <label for="password">Password</label>
-            <input type="text" id="password">
+            <input type="text" id="password"> -->
             <br/><br/><br/><br/>
             <button id="go">Go</button>    
         </div>
@@ -44,14 +44,14 @@
         <script>
             document.getElementById("go").addEventListener("click", function () {
                 var uuid = document.getElementById("uuid").value;
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
+                // var username = document.getElementById("username").value;
+                // var password = document.getElementById("password").value;
 
                 const url = "https://internal.chattadata.org/api/views/" + uuid + ".json";
                 const headers = {};
-                if (username && password) {
-                    headers.Authorization = "Basic " + btoa(username + ":" + password);
-                }
+                // if (username && password) {
+                //     headers.Authorization = "Basic " + btoa(username + ":" + password);
+                // }
 
                 fetch(url, { headers })
                 .then(response => response.json())
